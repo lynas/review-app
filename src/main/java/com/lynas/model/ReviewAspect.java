@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Review {
+public class ReviewAspect {
     @Id
     @GeneratedValue
     private Long id;

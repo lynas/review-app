@@ -20,8 +20,14 @@ public class Item {
     private String name;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Organization organization;
-    @OneToMany
-    private Set<Review> reviewAspects;
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<ReviewAspect> reviewAspects;
+
+    public Item(Long id, String name, Organization organization) {
+        this.id = id;
+        this.name = name;
+        this.organization = organization;
+    }
 }

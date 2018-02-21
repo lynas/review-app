@@ -17,6 +17,6 @@ public class Organization {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToOne
-    private Product product;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private ProductCategory productCategory;
 }

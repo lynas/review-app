@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -20,10 +17,10 @@ public class ItemReviewRating {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = false)
+    @ManyToOne
     private Item item;
-    @Column(nullable = false)
-    private Review review;
+    @ManyToOne
+    private ReviewAspect reviewAspect;
     @Min(0)
     @Max(10)
     @Column(nullable = false)

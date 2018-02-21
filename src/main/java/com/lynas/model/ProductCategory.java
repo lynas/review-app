@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Product {
+public class ProductCategory {
 
     @Id
     @GeneratedValue
