@@ -25,4 +25,10 @@ public class ItemReviewRating {
     @Max(10)
     @Column(nullable = false)
     private int score;
+
+    public ItemReviewRating(Item item, ReviewAspect reviewAspect, int score) {
+        this.item = item;
+        this.reviewAspect = reviewAspect;
+        this.score = score;
+    }
 }
