@@ -15,11 +15,13 @@ public class Item {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String name;
     private String description;
 
+    @ManyToOne
+    private Organization organization;
     @OneToMany
     private Set<Review> reviewAspects;
 }

@@ -19,7 +19,7 @@ import javax.validation.constraints.Min;
 public class ItemReviewRating {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @Column(nullable = false)
     private Item item;
     @Column(nullable = false)

@@ -16,7 +16,7 @@ import javax.persistence.Id;
 public class Review {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @Column(unique = true, nullable = false)
     private String aspect;
 
