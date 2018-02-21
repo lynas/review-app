@@ -1,14 +1,11 @@
-package com.lynas;
+package com.lynas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -19,9 +16,10 @@ public class Item {
     @Id
     @GeneratedValue
     private long id;
+    @Column(unique = true, nullable = false)
     private String name;
     private String description;
 
     @OneToMany
-    private List<Review> reviews;
+    private Set<Review> reviewAspects;
 }

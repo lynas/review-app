@@ -1,26 +1,23 @@
-package com.lynas;
+package com.lynas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Review {
+public class Product {
+
     @Id
     @GeneratedValue
     private long id;
-    private String aspect;
-    @Min(0)
-    @Max(10)
-    private int score;
-
+    @Column(unique = true, nullable = false)
+    private String type;
 }

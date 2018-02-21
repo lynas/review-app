@@ -1,9 +1,10 @@
-package com.lynas;
+package com.lynas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,11 +13,10 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Product {
-
+public class Organization {
     @Id
     @GeneratedValue
     private long id;
-    private String type;
-    private String providedBy;
+    @Column(unique = true, nullable = false)
+    private String name;
 }
