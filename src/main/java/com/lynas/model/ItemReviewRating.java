@@ -21,8 +21,8 @@ public class ItemReviewRating {
     private Item item;
     @ManyToOne
     private ReviewAspect reviewAspect;
-    @Min(0)
-    @Max(10)
+    @Min(1)
+    @Max(5)
     @Column(nullable = false)
     private int score;
 

@@ -37,6 +37,7 @@ public class ItemReviewRatingService {
         for (ReviewAspect reviewAspect : item.getReviewAspects()) {
             final List<ItemReviewRating> list = itemReviewRatingRepository.findByItemAndReviewAspect(item, reviewAspect);
             if (list.isEmpty()) {
+                itemScore.put(reviewAspect.getAspect(), 0d);
                 continue;
             }
             final double sum = list.stream().mapToDouble(ItemReviewRating::getScore).sum();
