@@ -1,5 +1,7 @@
 package com.lynas.controller;
 
+import com.lynas.dto.RateItemReviewDTO;
+import com.lynas.dto.SuccessResponseDTO;
 import com.lynas.exception.EntityNotFoundException;
 import com.lynas.service.ItemReviewRatingService;
 import org.springframework.http.HttpStatus;
@@ -19,11 +21,11 @@ public class ReviewAspectRatingController {
         this.itemReviewRatingService = itemReviewRatingService;
     }
 
-    @PostMapping("/item/{itemId}/review_aspect/{review_aspect_id}/score/{score}")
-    public ResponseEntity rateReviewAspectOfItem(@PathVariable Long itemId, @PathVariable Long review_aspect_id,
-                                                 @PathVariable int score) throws EntityNotFoundException {
-        return new ResponseEntity(itemReviewRatingService.rateItemReview(itemId, review_aspect_id, score),
-                HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity rateReviewAspectOfItem(@RequestBody RateItemReviewDTO rateItemReviewDTO) throws EntityNotFoundException {
+        boolean result = itemReviewRatingService.rateItemReview(rateItemReviewDTO.getItemId(),
+                rateItemReviewDTO.getReviewAspectId(), rateItemReviewDTO.getScore());
+        return new ResponseEntity(new SuccessResponseDTO(result), HttpStatus.CREATED);
     }
 
     @GetMapping("/item/{itemId}")

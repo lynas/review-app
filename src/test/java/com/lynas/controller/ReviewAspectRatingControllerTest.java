@@ -1,5 +1,6 @@
 package com.lynas.controller;
 
+import com.lynas.dto.RateItemReviewDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,17 @@ public class ReviewAspectRatingControllerTest {
 
     @Test
     public void rateReviewAspectOfItemTest() {
-        ResponseEntity<String> response = restTemplate.postForEntity(
-                "/rate/item/1/review_aspect/1/score/4",
-                null,String.class);
+        RateItemReviewDTO rateItemReviewDTO = new RateItemReviewDTO(1L, 1L, 5);
+        ResponseEntity<HashMap> response = restTemplate.postForEntity(
+                "/rate",
+                rateItemReviewDTO, HashMap.class);
         assertEquals(response.getStatusCode(), HttpStatus.CREATED);
-        assertEquals(response.getBody(), "true");
+        assertEquals(response.getBody().get("success"), true);
     }
 
     @Test
-    public void getItemReviewAspectRatingTest(){
-        ResponseEntity<HashMap> response = restTemplate.getForEntity("/rate/item/1",HashMap.class);
+    public void getItemReviewAspectRatingTest() {
+        ResponseEntity<HashMap> response = restTemplate.getForEntity("/rate/item/1", HashMap.class);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertEquals(response.getBody().get("Temperature"), 0.0);
     }
