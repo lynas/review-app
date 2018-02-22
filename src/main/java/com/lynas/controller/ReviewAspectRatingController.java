@@ -2,6 +2,8 @@ package com.lynas.controller;
 
 import com.lynas.exception.EntityNotFoundException;
 import com.lynas.service.ItemReviewRatingService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,9 +19,11 @@ public class ReviewAspectRatingController {
     }
 
     @PostMapping("/item/{itemId}/review_aspect/{review_aspect_id}")
-    public boolean rateReviewAspectOfItem(@PathVariable Long itemId, @PathVariable Long review_aspect_id,
-                                          @RequestBody int score) throws EntityNotFoundException {
-        return itemReviewRatingService.rateItemReview(itemId, review_aspect_id, score);
+    public ResponseEntity rateReviewAspectOfItem(@PathVariable Long itemId, @PathVariable Long review_aspect_id,
+                                                 @RequestBody int score) throws EntityNotFoundException {
+        return new ResponseEntity(
+                itemReviewRatingService.rateItemReview(itemId, review_aspect_id, score),
+                HttpStatus.CREATED);
     }
 
     @GetMapping("/{itemId}")
