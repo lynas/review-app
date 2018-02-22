@@ -5,6 +5,7 @@ import com.lynas.model.Item;
 import com.lynas.model.ItemReviewRating;
 import com.lynas.model.ReviewAspect;
 import com.lynas.repository.ItemReviewRatingRepository;
+import com.lynas.util.Util;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class ItemReviewRatingService {
                 continue;
             }
             final double sum = list.stream().mapToDouble(ItemReviewRating::getScore).sum();
-            itemScore.put(reviewAspect.getAspect(), (sum / list.size()));
+            itemScore.put(reviewAspect.getAspect(), new Util().formateRatingAvg(sum / list.size()));
         }
         return itemScore;
     }
