@@ -31,6 +31,11 @@ dependencies {
 			"io.springfox:springfox-swagger2:${swaggerVersion}",
 			"io.springfox:springfox-swagger-ui:${swaggerVersion}"
 	)
+	compile(
+			'org.springframework.boot:spring-boot-starter-thymeleaf',
+			'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect',
+			'com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute'
+	)
 	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
