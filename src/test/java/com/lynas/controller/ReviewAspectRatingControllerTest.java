@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -35,8 +36,10 @@ public class ReviewAspectRatingControllerTest {
 
     @Test
     public void getItemReviewAspectRatingTest() {
-        ResponseEntity<HashMap> response = restTemplate.getForEntity("/rate/item/1", HashMap.class);
+        ResponseEntity<List> response = restTemplate.getForEntity("/rate/item/1", List.class);
         assertEquals(response.getStatusCode(), HttpStatus.OK);
-        assertEquals(response.getBody().get("Temperature"), 0.0);
+        HashMap hashMap = (HashMap) response.getBody().get(0);
+        assertEquals(hashMap.get("avgScore"), 0.0);
+        assertEquals(hashMap.get("reviewAspectName"), "Presentation");
     }
 }
