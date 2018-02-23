@@ -62,10 +62,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div style="visibility: hidden">{{selectedItemId}}</div>
+            <div>
+                My Rating (min 1 max 5) : <input type="text" ng-model="my_rating" />
+            </div>
             <ul>
                 <li ng-repeat="reviewAspect in reviewAspectList">{{reviewAspect.reviewAspectName}} -
                     {{reviewAspect.avgScore}}
-                    <button ng-click="rate(reviewAspect.reviewAspectId, selectedItemId)">Rate</button>
+                    <button ng-click="postRating(selectedItemId,reviewAspect.reviewAspectId)">Rate</button>
                 </li>
             </ul>
         </div>
