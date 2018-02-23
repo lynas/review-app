@@ -45,7 +45,16 @@ app.controller('myCtrl', function ($scope, $http) {
         $http.get("/rate/item/"+v1)
             .success(function (data) {
                 console.log(data);
+                $scope.reviewAspectList = data;
+                $scope.selectedItemId = v1;
             });
+    };
+
+    $scope.rate = function (v1,v2) {
+
+        console.log(v1);
+        console.log(v2);
+
     };
 
 

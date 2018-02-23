@@ -1,16 +1,15 @@
 package com.lynas.service;
 
+import com.lynas.dto.ReviewAspectDTO;
 import com.lynas.exception.EntityNotFoundException;
 import com.lynas.model.Item;
 import com.lynas.model.ItemReviewRating;
 import com.lynas.model.ReviewAspect;
 import com.lynas.repository.ItemReviewRatingRepository;
-import com.lynas.util.Util;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ItemReviewRatingService {
@@ -28,22 +27,23 @@ public class ItemReviewRatingService {
     public boolean rateItemReview(Long itemId, Long reviewAspectId, int ratingScore) throws EntityNotFoundException {
         final Item item = itemService.findById(itemId);
         final ReviewAspect reviewAspect = reviewAspectService.findById(reviewAspectId);
-        itemReviewRatingRepository.save(new ItemReviewRating(item,reviewAspect,ratingScore));
+        itemReviewRatingRepository.save(new ItemReviewRating(item, reviewAspect, ratingScore));
         return true;
     }
 
-    public Map<String, Double> getItemReview(Long itemId) throws EntityNotFoundException {
+    public List<ReviewAspectDTO> getItemReview(Long itemId) throws EntityNotFoundException {
         final Item item = itemService.findById(itemId);
-        Map<String, Double> itemScore = new HashMap<>();
+        List<ReviewAspectDTO> itemScoreList = new ArrayList<>();
         for (ReviewAspect reviewAspect : item.getReviewAspects()) {
-            final List<ItemReviewRating> list = itemReviewRatingRepository.findByItemAndReviewAspect(item, reviewAspect);
+            final List<ItemReviewRating> list
+                    = itemReviewRatingRepository.findByItemAndReviewAspect(item, reviewAspect);
             if (list.isEmpty()) {
-                itemScore.put(reviewAspect.getAspect(), 0d);
+                itemScoreList.add(new ReviewAspectDTO(reviewAspect.getId(), reviewAspect.getAspect(),0d));
                 continue;
             }
-            final double sum = list.stream().mapToDouble(ItemReviewRating::getScore).sum();
-            itemScore.put(reviewAspect.getAspect(), new Util().formateRatingAvg(sum / list.size()));
+            final double sum = (list.stream().mapToDouble(ItemReviewRating::getScore).sum()) / list.size();
+            itemScoreList.add(new ReviewAspectDTO(reviewAspect.getId(), reviewAspect.getAspect(), sum));
         }
-        return itemScore;
+        return itemScoreList;
     }
 }

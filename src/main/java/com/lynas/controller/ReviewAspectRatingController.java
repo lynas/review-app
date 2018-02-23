@@ -1,6 +1,7 @@
 package com.lynas.controller;
 
 import com.lynas.dto.RateItemReviewDTO;
+import com.lynas.dto.ReviewAspectDTO;
 import com.lynas.dto.SuccessResponseDTO;
 import com.lynas.exception.EntityNotFoundException;
 import com.lynas.service.ItemReviewRatingService;
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 @SuppressWarnings("unchecked")
 @RestController
@@ -29,7 +30,7 @@ public class ReviewAspectRatingController {
     }
 
     @GetMapping("/item/{itemId}")
-    public Map<String, Double> getItemReviewAspectRating(@PathVariable Long itemId) throws EntityNotFoundException {
+    public List<ReviewAspectDTO> getItemReviewAspectRating(@PathVariable Long itemId) throws EntityNotFoundException {
         return itemReviewRatingService.getItemReview(itemId);
     }
 }
