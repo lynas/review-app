@@ -16,7 +16,7 @@ app.controller('myCtrl', function ($scope, $http) {
             url: "/rate",
             data: {itemId: selectedItemId, reviewAspectId: reviewAspectId, score: $scope.my_rating}
         }).success(function (data) {
-            $scope.newAppUser = data;
+            $scope.get_review(selectedItemId);
         });
     };
 });
